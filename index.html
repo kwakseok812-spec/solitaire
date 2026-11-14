@@ -36,7 +36,8 @@ svg{display:block}
 .stat{display:flex;align-items:baseline;gap:7px;min-height:40px;padding:0 13px;border-radius:13px;background:var(--panel);border:1.5px solid var(--line);align-items:center}
 .stat small{color:var(--dim);font-size:12px}
 .stat b{font-family:var(--serif);font-size:21px;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
-#modeTag::after{content:' BE'}
+#modeTag{display:inline-flex;align-items:center;gap:6px}
+#modeTag svg{width:14px;height:14px}
 #modeTag:active{transform:scale(.96)}
 #modeTag{margin-left:auto;padding:8px 13px;border-radius:999px;background:#43321f;border:1.5px solid var(--gold);color:var(--gold);font-size:13px;font-weight:800;white-space:nowrap}
 
@@ -125,7 +126,7 @@ html.calm *,html.calm *::before{animation:none!important;transition:none!importa
     <div id="top">
       <div class="stat"><small>이동</small><b id="mv">0</b></div>
       <div class="stat"><small>시간</small><b id="tm">0:00</b></div>
-      <button id="modeTag" type="button">1장 뽑기</button>
+      <button id="modeTag" type="button"><span id="modeTxt">1장 뽑기</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
     </div>
     <div id="bottom">
       <button class="act" id="bUndo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg>무르기</button>
@@ -437,7 +438,7 @@ function render(opt){
 }
 function head(){
   $('mv').textContent=S.moves;$('tm').textContent=fmt(elapsed);
-  $('modeTag').textContent=S.draw+'장 뽑기';
+  $('modeTxt').textContent=S.draw+'장 뽑기';
   $('bUndo').disabled=!undo.length||won||!!autoRun;
 }
 function fmt(ms){var s=Math.floor(ms/1000),m=Math.floor(s/60);s%=60;return m+':'+(s<10?'0':'')+s;}
